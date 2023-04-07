@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     private Animator animator;
     private string currentState;
+    private bool isIdle;
+    private bool isRunning;
 
 
     // Start is called before the first frame update
