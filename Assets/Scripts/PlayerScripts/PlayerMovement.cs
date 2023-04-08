@@ -66,10 +66,14 @@ public class PlayerMovement : MonoBehaviour
             if (rb.velocity.x != 0f)
             {
                 ChangeAnimationState("Run");
+                animator.SetBool("isRunning", true);
+                animator.SetBool("isIdle", false);
             }
             else
             {
                 ChangeAnimationState("Idle");
+                animator.SetBool("isRunning", false);
+                animator.SetBool("isIdle", true);
             }
         }
         else if (rb.velocity.y > 0f)
