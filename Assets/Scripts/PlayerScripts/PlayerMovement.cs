@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     private Animator animator;
     private string currentState;
-    private bool isIdle;
-    private bool isRunning;
+    public static bool isGrounded;
 
 
     // Start is called before the first frame update
@@ -76,11 +75,11 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isIdle", true);
             }
         }
-        else if (rb.velocity.y > 0f)
+        else if (rb.velocity.y > 0f && !PlayerAttack.isAttacking)
         {
             ChangeAnimationState("Jump");
         }
-        else if (rb.velocity.y < 0f)
+        else if (rb.velocity.y < 0f && !PlayerAttack.isAttacking)
         {
             ChangeAnimationState("Fall");
         }
@@ -89,7 +88,7 @@ public class PlayerMovement : MonoBehaviour
     public void Jump(InputAction.CallbackContext context)
     {
         if (PauseMenuScript.isPaused) return;
-        if (context.performed && IsGrounded())
+        if (context.performed && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
 
@@ -116,9 +115,9 @@ public class PlayerMovement : MonoBehaviour
         currentState = newState;
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
     private void Flip()
