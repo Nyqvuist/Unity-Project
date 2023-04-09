@@ -14,6 +14,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void Attack(InputAction.CallbackContext context)
     {
+        if (PauseMenuScript.isPaused) return;
         if (context.performed && PlayerMovement.isGrounded)
         {
             animator.SetTrigger("Attack");
