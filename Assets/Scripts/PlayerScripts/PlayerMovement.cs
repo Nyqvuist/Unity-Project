@@ -59,6 +59,7 @@ public class PlayerMovement : MonoBehaviour
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
 
         rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
+        animator.SetFloat("y_vel", rb.velocity.y);
 
         if (IsGrounded())
         {
@@ -75,14 +76,6 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isIdle", true);
             }
         }
-        else if (rb.velocity.y > 0f && !PlayerAttack.isAttacking)
-        {
-            ChangeAnimationState("Jump");
-        }
-        else if (rb.velocity.y < 0f && !PlayerAttack.isAttacking)
-        {
-            ChangeAnimationState("Fall");
-        }
     }
 
     public void Jump(InputAction.CallbackContext context)
@@ -94,11 +87,6 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
-        if (context.canceled && rb.velocity.y > 0f)
-        {
-            rb.AddForce(Vector2.up * 0.5f, ForceMode2D.Impulse);
-
-        }
     }
 
     public void Move(InputAction.CallbackContext context)
