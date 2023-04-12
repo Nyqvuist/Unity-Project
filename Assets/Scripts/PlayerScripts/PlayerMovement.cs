@@ -23,7 +23,6 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     private Animator animator;
-    private string currentState;
     public static bool isGrounded;
 
 
@@ -98,15 +97,6 @@ public class PlayerMovement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         inputX = context.ReadValue<Vector2>().x;
-    }
-
-    void ChangeAnimationState(string newState)
-    {
-        if (currentState == newState) return;
-
-        animator.Play(newState);
-
-        currentState = newState;
     }
 
     public bool IsGrounded()
