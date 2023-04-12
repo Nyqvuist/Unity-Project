@@ -4,6 +4,17 @@ using UnityEngine.InputSystem;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private Animator animator;
+    private bool isAttacking;
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
+
+    }
 
     public void Attack(InputAction.CallbackContext context)
     {
@@ -11,6 +22,7 @@ public class PlayerAttack : MonoBehaviour
         if (context.performed && PlayerMovement.isGrounded)
         {
             animator.SetTrigger("Attack");
+
         }
         else if (context.performed && !PlayerMovement.isGrounded)
         {
