@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Enemy
+  - Players
   layers:
   - Default
   - TransparentFX
@@ -13,10 +15,10 @@ TagManager:
   - Water
   - UI
   - Platform
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - PlayerGroundHitbox
+  - EnemyGroundHitbox
   - 
   - 
   - 
