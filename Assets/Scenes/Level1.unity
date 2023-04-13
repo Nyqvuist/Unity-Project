@@ -941,6 +941,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1003965096}
+  audioSource: {fileID: 1613304878}
+  audioClipArray:
+  - {fileID: 8300000, guid: 24a72fda2fd6998458fc37d946e6959a, type: 3}
+  - {fileID: 8300000, guid: 031caf6390549174f8dce51e496872f8, type: 3}
 --- !u!1 &1041669896
 GameObject:
   m_ObjectHideFlags: 0
@@ -1834,7 +1838,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1716398174
 GameObject:
