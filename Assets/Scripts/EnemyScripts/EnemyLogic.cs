@@ -9,8 +9,8 @@ public class EnemyLogic : MonoBehaviour
     public AudioClip[] audioClipArray;
 
     // Retrieve Game Objects of Player and Enemy
-    public GameObject playerObj = null;
-    public GameObject enemyObj = null;
+    private GameObject playerObj = null;
+    private GameObject enemyObj = null;
 
     // Vector3 position of player and enemy
     Vector3 playerPos;
