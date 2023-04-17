@@ -41,11 +41,11 @@ public class EnemyLogic : MonoBehaviour
         // Vector3 Constructor takes in three number variables (x,y,z)
         if (playerPos.x < enemyPos.x)
         {
-            enemyObj.transform.localScale = new Vector3(2.441683f, 2.905868f, 2);
+            enemyObj.transform.localScale = new Vector3(7.441683f, 7.905868f, 2);
         }
         else
         {
-            enemyObj.transform.localScale = new Vector3(-2.441683f, 2.905868f, 2);
+            enemyObj.transform.localScale = new Vector3(-7.441683f, 7.905868f, 2);
         }
     }
 
