@@ -51,7 +51,7 @@ public class EnemyLogic : MonoBehaviour
 
     public void GetHit()
     {
-        animator.SetTrigger("Hurt");
+        animator.SetTrigger("Attack");
         audioSource.PlayOneShot(PlayRandomSound());
     }
 
