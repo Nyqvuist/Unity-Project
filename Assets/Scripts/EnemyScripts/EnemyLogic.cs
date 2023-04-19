@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyLogic : MonoBehaviour
 {
@@ -16,8 +17,20 @@ public class EnemyLogic : MonoBehaviour
     Vector3 playerPos;
     Vector3 enemyPos;
 
+    private Rigidbody2D rb;
+    public static bool isGrounded;
+    private bool idle;
+
+    private float attackRange = 1.5f;
+    private bool isChasing;
+    private float chaseDistance = 7;
+    private float chaseOutofDistance = 15;
+
     private void Start()
     {
+        animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+
         // Instantiate gameObject for the player and enemy, depends on the name of the object
         if (playerObj == null)
             playerObj = GameObject.Find("Player");
@@ -37,23 +50,60 @@ public class EnemyLogic : MonoBehaviour
         //Debug.Log("playerPos: " + playerPos);
         //Debug.Log("enemyPos: " + enemyPos);
 
-        // If player is left side of enemy, face right, else face left
-        // Vector3 Constructor takes in three number variables (x,y,z)
-        if (playerPos.x < enemyPos.x)
+        // Chase Distance is when to start chasing
+        if (Vector2.Distance(enemyPos, playerPos) < chaseDistance)
         {
-            enemyObj.transform.localScale = new Vector3(7.441683f, 7.905868f, 2);
+            isChasing = true;
         }
-        else
+
+        // Out Of Distance is when to stop chasing
+        if (Vector2.Distance(enemyPos, playerPos) > chaseOutofDistance)
         {
-            enemyObj.transform.localScale = new Vector3(-7.441683f, 7.905868f, 2);
+            isChasing = false;
         }
+
+        // Run towards player if in chase mode, or else idle
+        // If player is left side of enemy, face left, else face right. Same for running direction.
+        // Vector3 Constructor takes in three number variables (x,y,z) (x and y are size?)
+        if (isChasing)
+        {
+            if (playerPos.x < enemyPos.x)
+            {
+                enemyObj.transform.localScale = new Vector3(7.441683f, 7.905868f, 2);
+                animator.SetBool("isRunning", true);
+                rb.velocity = new Vector2(-4, 0);
+            }
+            else if (playerPos.x > enemyPos.x)
+            {
+                enemyObj.transform.localScale = new Vector3(-7.441683f, 7.905868f, 2);
+                animator.SetBool("isRunning", true);
+                rb.velocity = new Vector2(4, 0);
+            }
+
+        } else {
+           
+            animator.SetBool("isRunning", false);
+            
+        }
+
+
     }
 
+    // I tried to stop the player when they get hit or to stall them but.. no luck
     public void GetHit()
     {
-        animator.SetTrigger("Attack");
+        rb.velocity = new Vector2(0, 0);
+        animator.SetTrigger("Hurt");
         audioSource.PlayOneShot(PlayRandomSound());
     }
+
+    //IEnumerator GetHitCoroutine()
+    //{
+    //    rb.velocity = new Vector2(0, 0);
+    //    animator.SetTrigger("Hurt");
+    //    audioSource.PlayOneShot(PlayRandomSound());
+    //    yield return new WaitForSeconds(3);
+    //}
 
     AudioClip PlayRandomSound()
     {
