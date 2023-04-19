@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     private Animator animator;
     public static bool isGrounded;
+    private bool idle;
 
 
     // Start is called before the first frame update
@@ -36,6 +37,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+
         if (!isFacingRight && rb.velocity.x > 0)
         {
             Flip();
@@ -60,20 +64,27 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
         animator.SetFloat("y_vel", rb.velocity.y);
 
+
         if (IsGrounded())
         {
             animator.SetFloat("x_vel", Mathf.Abs(rb.velocity.x));
             animator.SetBool("isGrounded", isGrounded);
 
+
+
             if (rb.velocity.x != 0f)
             {
+                idle = false;
                 animator.SetBool("isRunning", true);
-                animator.SetBool("isIdle", false);
+                animator.SetBool("isIdle", idle);
+
             }
             else
             {
+                idle = true;
                 animator.SetBool("isRunning", false);
-                animator.SetBool("isIdle", true);
+                animator.SetBool("isIdle", idle);
+                ;
             }
         }
         else
@@ -89,16 +100,18 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed && isGrounded)
         {
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
-
         }
 
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+
         inputX = context.ReadValue<Vector2>().x;
     }
 
+
+    // Need to rework Ground Check to better deal with slopes.
     public bool IsGrounded()
     {
         return isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
