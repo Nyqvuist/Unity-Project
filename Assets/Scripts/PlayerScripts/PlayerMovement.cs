@@ -14,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float velPower;
 
     [Header("Grounded")]
-    [SerializeField] private Transform groundCheck;
+    [SerializeField] private Vector2 boxSize;
+    [SerializeField] private float castDistance;
     [SerializeField] private LayerMask groundLayer;
 
     [Header("Jumping")]
@@ -38,8 +39,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
 
-
-
         if (!isFacingRight && rb.velocity.x > 0)
         {
             Flip();
@@ -50,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
+    // Thinking about moving away from Rigidbody movement.
     private void FixedUpdate()
     {
         float targetSpeed = inputX * moveSpeed;
@@ -84,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
                 idle = true;
                 animator.SetBool("isRunning", false);
                 animator.SetBool("isIdle", idle);
-                ;
+                rb.velocity = Vector2.zero;
             }
         }
         else
@@ -106,15 +105,21 @@ public class PlayerMovement : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-
         inputX = context.ReadValue<Vector2>().x;
     }
 
 
-    // Need to rework Ground Check to better deal with slopes.
+    // BoxCast to check if grounded using Raycast.
     public bool IsGrounded()
     {
-        return isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        return isGrounded = Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer);
+    }
+
+    // Drawing the boxcast to get visuals for debugging.
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position - transform.up * castDistance, boxSize);
     }
 
     private void Flip()
