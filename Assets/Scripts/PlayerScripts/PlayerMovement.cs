@@ -62,7 +62,6 @@ public class PlayerMovement : MonoBehaviour
 
         rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
         animator.SetFloat("y_vel", rb.velocity.y);
-        Debug.Log(rb.velocity.x);
 
         if (IsGrounded())
         {
@@ -84,7 +83,6 @@ public class PlayerMovement : MonoBehaviour
                 idle = true;
                 animator.SetBool("isRunning", false);
                 animator.SetBool("isIdle", idle);
-                rb.velocity = Vector2.zero;
 
             }
         }
