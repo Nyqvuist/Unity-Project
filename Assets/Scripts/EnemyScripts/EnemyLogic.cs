@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 
 public class EnemyLogic : MonoBehaviour
 {
@@ -80,10 +79,12 @@ public class EnemyLogic : MonoBehaviour
                 rb.velocity = new Vector2(4, 0);
             }
 
-        } else {
-           
+        }
+        else
+        {
+
             animator.SetBool("isRunning", false);
-            
+
         }
 
 
