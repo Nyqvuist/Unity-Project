@@ -20405,6 +20405,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: f1e0f55e-b76b-43f9-b61d-8595b873a633
     m_ActionName: UI/Paused[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c794d29b-45a3-4afd-b379-b01eb1970323
+    m_ActionName: Player/Interact[/Keyboard/e]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
