@@ -1326,7 +1326,7 @@ GameObject:
   - component: {fileID: 940863673}
   - component: {fileID: 940863672}
   - component: {fileID: 940863671}
-  - component: {fileID: 940863670}
+  - component: {fileID: 940863676}
   m_Layer: 10
   m_Name: NPC_3
   m_TagString: NPC
@@ -1334,19 +1334,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &940863670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 940863669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d735862a4174e64bbf186b79a5cdf2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 940863671}
 --- !u!95 &940863671
 Animator:
   serializedVersion: 5
@@ -1471,6 +1458,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &940863676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 940863669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2aff42fe0007f045b45b87dcd808c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 940863671}
 --- !u!1 &957530596
 GameObject:
   m_ObjectHideFlags: 0
@@ -19832,7 +19832,7 @@ GameObject:
   - component: {fileID: 1015631355}
   - component: {fileID: 1015631354}
   - component: {fileID: 1015631353}
-  - component: {fileID: 1015631352}
+  - component: {fileID: 1015631358}
   m_Layer: 10
   m_Name: NPC_2
   m_TagString: NPC
@@ -19840,19 +19840,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1015631352
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1015631351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d735862a4174e64bbf186b79a5cdf2e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1015631353}
 --- !u!95 &1015631353
 Animator:
   serializedVersion: 5
@@ -19977,6 +19964,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1015631358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015631351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a14a552d40d85e54fa066bf2d569b079, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1015631353}
 --- !u!1 &1041669896
 GameObject:
   m_ObjectHideFlags: 0

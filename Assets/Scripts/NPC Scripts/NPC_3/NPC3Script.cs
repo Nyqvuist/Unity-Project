@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPCScript : MonoBehaviour
+public class NPC3Script : MonoBehaviour
 {
     [SerializeField] private Animator animator;
 
@@ -29,7 +29,7 @@ public class NPCScript : MonoBehaviour
             playerObj = GameObject.Find("Player");
 
         if (npcObj == null)
-            npcObj = GameObject.FindGameObjectWithTag("NPC");
+            npcObj = GameObject.Find("NPC_3");
 
         // Obtaining the X and Y scale of current NPC object
         npcScaleX = npcObj.transform.localScale.x;
