@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -52,6 +51,11 @@ public class PlayerMovement : MonoBehaviour
     // Thinking about moving away from Rigidbody movement.
     private void FixedUpdate()
     {
+
+        HandleJumping();
+
+        HandleHorizontalMovement();
+
         float targetSpeed = inputX * moveSpeed;
 
         float speedDif = targetSpeed - rb.velocity.x;
@@ -93,21 +97,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    private void HandleJumping()
     {
+        bool jumpPressed = InputManager.GetInstance().GetJumpPressed();
         if (PauseMenuScript.isPaused) return;
-        if (context.performed && isGrounded)
+        if (isGrounded && jumpPressed)
         {
+            isGrounded = false;
             rb.AddForce(Vector2.up * jumpingPower, ForceMode2D.Impulse);
         }
-
     }
 
-    public void Move(InputAction.CallbackContext context)
+    private void HandleHorizontalMovement()
     {
-        inputX = context.ReadValue<Vector2>().x;
+        Vector2 moveDirection = InputManager.GetInstance().GetMoveDirection();
+        inputX = moveDirection.x;
     }
-
 
     // BoxCast to check if grounded using Raycast.
     public bool IsGrounded()
