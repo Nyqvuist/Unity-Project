@@ -37,40 +37,16 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
     }
 
-    private void Update()
-    {
-        if (!dialogueIsPlaying)
-        {
-            return;
-        }
-    }
-
-    private void ContinueStory()
-    {
-        if (currentStory.canContinue)
-        {
-            dialogueText.text = currentStory.Continue();
-        }
-        else
-        {
-            ExitDialogueMode();
-        }
-    }
-
     public void EnterDialogueMode(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
-        ContinueStory();
+        if (currentStory.canContinue)
+        {
+            dialogueText.text = currentStory.Continue();
+        }
 
-    }
-
-    private void ExitDialogueMode()
-    {
-        dialogueIsPlaying = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
     }
 }
