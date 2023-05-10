@@ -12,7 +12,7 @@ public class DialogueTrigger : MonoBehaviour
         playerInRange = false;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (playerInRange)
         {
@@ -37,6 +37,7 @@ public class DialogueTrigger : MonoBehaviour
         if (col.gameObject.tag == "Players")
         {
             playerInRange = false;
+            DialogueManager.GetInstance().ExitDialogueMode();
 
         }
     }

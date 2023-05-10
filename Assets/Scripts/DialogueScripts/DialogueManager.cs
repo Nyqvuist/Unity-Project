@@ -55,13 +55,6 @@ public class DialogueManager : MonoBehaviour
 
     }
 
-    private void ExitDialogueMode()
-    {
-        dialogueIsPlaying = false;
-        dialoguePanel.SetActive(false);
-        dialogueText.text = "";
-    }
-
     private void ContinueStory()
     {
         if (currentStory.canContinue)
@@ -72,5 +65,12 @@ public class DialogueManager : MonoBehaviour
         {
             ExitDialogueMode();
         }
+    }
+
+    public void ExitDialogueMode()
+    {
+        dialogueIsPlaying = false;
+        dialoguePanel.SetActive(false);
+        dialogueText.text = "";
     }
 }
