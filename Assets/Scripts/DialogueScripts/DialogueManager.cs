@@ -20,7 +20,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (instance == null)
         {
-            Debug.LogWarning("Found more than one Dialogue");
+            Debug.LogWarning("Found more than one DialogueManager.");
         }
 
         instance = this;
