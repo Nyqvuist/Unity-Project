@@ -1,1 +1,6 @@
-Hello there young assassin. 
+VAR riddle = ""
+VAR answer = ""
+
+Hello there young assassin.
+The demons here are rather strong, their words quite sharp...
+Be careful {riddle}.

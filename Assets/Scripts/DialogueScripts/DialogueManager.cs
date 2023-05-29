@@ -14,11 +14,11 @@ public class DialogueManager : MonoBehaviour
 
     private Story currentStory;
 
-    private bool dialogueIsPlaying;
+    public bool dialogueIsPlaying;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null)
         {
             Debug.LogWarning("Found more than one DialogueManager.");
         }
@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+
     }
 
     private void Update()
@@ -43,6 +44,12 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
+
+        if (InputManager.GetInstance().GetInteractPressed())
+        {
+            ContinueStory();
+        }
+
     }
 
     public void EnterDialogueMode(TextAsset inkJSON)
@@ -50,6 +57,9 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+        currentStory.variablesState["riddle"] = "test";
+
+        Debug.Log(currentStory.variablesState["riddle"]);
 
         ContinueStory();
 
@@ -73,4 +83,5 @@ public class DialogueManager : MonoBehaviour
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
     }
+
 }
