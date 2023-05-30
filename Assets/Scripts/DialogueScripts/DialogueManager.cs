@@ -57,7 +57,8 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-        currentStory.variablesState["riddle"] = "test";
+        currentStory.variablesState["riddle"] = "riddle";
+        currentStory.variablesState["answer"] = "answer";
 
         Debug.Log(currentStory.variablesState["riddle"]);
 
