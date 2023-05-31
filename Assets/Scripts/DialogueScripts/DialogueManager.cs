@@ -11,12 +11,15 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private GameObject dialoguePanel;
     [SerializeField] private TextMeshProUGUI dialogueText;
 
+    [SerializeField] private TextAsset riddleJSON;
+
+    public RiddlesList riddleList = new RiddlesList();
 
     private Story currentStory;
 
     public bool dialogueIsPlaying;
 
-    private void Awake()
+    public void Awake()
     {
         if (instance != null)
         {
@@ -24,6 +27,8 @@ public class DialogueManager : MonoBehaviour
         }
 
         instance = this;
+
+        riddleList = JsonUtility.FromJson<RiddlesList>(riddleJSON.text);
     }
 
     public static DialogueManager GetInstance()
@@ -57,10 +62,9 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
-        currentStory.variablesState["riddle"] = "riddle";
-        currentStory.variablesState["answer"] = "answer";
-
-        Debug.Log(currentStory.variablesState["riddle"]);
+        RiddlesObject riddles = RandomizeRiddle();
+        currentStory.variablesState["riddle"] = riddles.riddle;
+        currentStory.variablesState["answer"] = riddles.answer;
 
         ContinueStory();
 
@@ -85,4 +89,24 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
     }
 
+
+    [System.Serializable]
+    public class RiddlesObject
+    {
+        public string riddle;
+        public string answer;
+    }
+
+    [System.Serializable]
+
+    public class RiddlesList
+    {
+        public RiddlesObject[] AllRiddles;
+    }
+
+
+    RiddlesObject RandomizeRiddle()
+    {
+        return riddleList.AllRiddles[Random.Range(0, riddleList.AllRiddles.Length)];
+    }
 }

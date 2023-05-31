@@ -1902,6 +1902,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 1009324237}
   dialogueText: {fileID: 628202871}
+  riddleJSON: {fileID: 4900000, guid: cb48f76f155148342b908abbedfa2780, type: 3}
+  riddleList:
+    AllRiddles: []
   dialogueIsPlaying: 0
 --- !u!1 &940863669
 GameObject:
