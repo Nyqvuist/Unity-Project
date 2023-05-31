@@ -28,6 +28,8 @@ public class DialogueManager : MonoBehaviour
 
         instance = this;
 
+
+        // obtaining the entire JSON list of riddles.
         riddleList = JsonUtility.FromJson<RiddlesList>(riddleJSON.text);
     }
 
@@ -62,6 +64,8 @@ public class DialogueManager : MonoBehaviour
         currentStory = new Story(inkJSON.text);
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
+
+        // Putting the return results of the function into riddles variable.
         RiddlesObject riddles = RandomizeRiddle();
         currentStory.variablesState["riddle"] = riddles.riddle;
         currentStory.variablesState["answer"] = riddles.answer;
@@ -89,7 +93,7 @@ public class DialogueManager : MonoBehaviour
         dialogueText.text = "";
     }
 
-
+    // Serializing the seperate objects within the AllRiddles list.
     [System.Serializable]
     public class RiddlesObject
     {
@@ -97,6 +101,7 @@ public class DialogueManager : MonoBehaviour
         public string answer;
     }
 
+    // Serializing the AllRiddles list. 
     [System.Serializable]
 
     public class RiddlesList
@@ -105,6 +110,7 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+    // Function to get one random riddle/answer object.
     RiddlesObject RandomizeRiddle()
     {
         return riddleList.AllRiddles[Random.Range(0, riddleList.AllRiddles.Length)];
