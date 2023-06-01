@@ -3,4 +3,7 @@ VAR answer = ""
 
 Hello there young assassin.
 The demons here are rather strong, their words quite sharp...
-{riddle}
+{riddle} # riddle
+#END
+
+-> END

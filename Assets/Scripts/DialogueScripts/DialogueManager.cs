@@ -17,6 +17,13 @@ public class DialogueManager : MonoBehaviour
 
     private Story currentStory;
 
+    private bool inputBoxActive;
+
+    private RiddlesObject riddles;
+
+    [SerializeField] private GameObject inputbox;
+    [SerializeField] private TMP_InputField inputText;
+
     public bool dialogueIsPlaying;
 
     public void Awake()
@@ -42,6 +49,8 @@ public class DialogueManager : MonoBehaviour
     {
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
+        inputbox.SetActive(false);
+
 
     }
 
@@ -65,8 +74,9 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
+
         // Putting the return results of the function into riddles variable.
-        RiddlesObject riddles = RandomizeRiddle();
+        riddles = RandomizeRiddle();
         currentStory.variablesState["riddle"] = riddles.riddle;
         currentStory.variablesState["answer"] = riddles.answer;
 
@@ -78,22 +88,29 @@ public class DialogueManager : MonoBehaviour
     {
         if (currentStory.canContinue)
         {
+
             dialogueText.text = currentStory.Continue();
+
         }
         else
         {
             ExitDialogueMode();
         }
+
+        CheckCurrentText();
     }
 
     public void ExitDialogueMode()
     {
+        inputbox.SetActive(false);
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+
     }
 
-    // Serializing the seperate objects within the AllRiddles list.
+    // Serializing the seperate objects within the AllRiddles array.
     [System.Serializable]
     public class RiddlesObject
     {
@@ -101,7 +118,7 @@ public class DialogueManager : MonoBehaviour
         public string answer;
     }
 
-    // Serializing the AllRiddles list. 
+    // Serializing the AllRiddles array. 
     [System.Serializable]
 
     public class RiddlesList
@@ -115,4 +132,17 @@ public class DialogueManager : MonoBehaviour
     {
         return riddleList.AllRiddles[Random.Range(0, riddleList.AllRiddles.Length)];
     }
+
+    private void CheckCurrentText()
+    {
+        if (currentStory.currentTags.Contains("riddle"))
+        {
+            inputbox.SetActive(true);
+        }
+        else
+        {
+            inputbox.SetActive(false);
+        }
+    }
+
 }
