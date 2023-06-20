@@ -99,7 +99,6 @@ public class DialogueManager : MonoBehaviour
         {
 
             dialogueText.text = currentStory.Continue();
-
         }
         else
         {

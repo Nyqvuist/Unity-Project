@@ -6,6 +6,8 @@ The demons here are rather strong, their words quite sharp...
 {riddle} # riddle
 #END
 
+-> END
+
 === right ===
 
 Cant believe you got it right.
