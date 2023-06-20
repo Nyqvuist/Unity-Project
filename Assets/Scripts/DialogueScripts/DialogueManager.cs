@@ -17,7 +17,11 @@ public class DialogueManager : MonoBehaviour
 
     private Story currentStory;
 
-    private bool inputBoxActive;
+    public bool inputBoxActive;
+
+    private bool submitted;
+
+    private string submittedAnswer;
 
     private RiddlesObject riddles;
 
@@ -50,8 +54,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         inputbox.SetActive(false);
-
-
+        inputBoxActive = false;
+        submitted = false;
     }
 
     private void Update()
@@ -61,9 +65,14 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (InputManager.GetInstance().GetInteractPressed())
+        if (InputManager.GetInstance().GetInteractPressed() || InputManager.GetInstance().GetSubmitPressed())
         {
             ContinueStory();
+        }
+
+        if (submitted)
+        {
+            CheckSubmited();
         }
 
     }
@@ -106,8 +115,7 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
-
-
+        inputText.text = "";
     }
 
     // Serializing the seperate objects within the AllRiddles array.
@@ -138,10 +146,34 @@ public class DialogueManager : MonoBehaviour
         if (currentStory.currentTags.Contains("riddle"))
         {
             inputbox.SetActive(true);
+            inputBoxActive = true;
         }
         else
         {
             inputbox.SetActive(false);
+            inputBoxActive = false;
+        }
+    }
+
+    public void PullAnswer(string answer)
+    {
+        submittedAnswer = answer;
+        submitted = true;
+    }
+
+    private void CheckSubmited()
+    {
+        if (submittedAnswer.ToLower() == riddles.answer.ToLower())
+        {
+            currentStory.ChoosePathString("right");
+            ContinueStory();
+            submitted = false;
+        }
+        else
+        {
+            currentStory.ChoosePathString("wrong");
+            ContinueStory();
+            submitted = false;
         }
     }
 

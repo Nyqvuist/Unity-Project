@@ -56,7 +56,7 @@ public class InputManager : MonoBehaviour
 
     public void InteractButtonPressed(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !DialogueManager.GetInstance().inputBoxActive)
         {
             interactPressed = true;
         }
