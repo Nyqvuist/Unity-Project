@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour
 
     public void MovePressed(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !DialogueManager.GetInstance().inputBoxActive)
         {
             moveDirection = context.ReadValue<Vector2>();
         }
@@ -44,7 +44,7 @@ public class InputManager : MonoBehaviour
 
     public void JumpPressed(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !DialogueManager.GetInstance().inputBoxActive)
         {
             jumpPressed = true;
         }
